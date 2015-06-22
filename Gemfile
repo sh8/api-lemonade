@@ -28,6 +28,9 @@ gem 'rb-readline'
 # use when crawl api data.
 gem 'faraday'
 
+# load environment variables
+gem 'dotenv-rails', :groups => [:development, :test]
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
