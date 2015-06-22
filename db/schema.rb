@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622052210) do
+ActiveRecord::Schema.define(version: 20150622134543) do
 
   create_table "average_prices", force: :cascade do |t|
     t.integer  "price",               limit: 4
@@ -59,15 +59,12 @@ ActiveRecord::Schema.define(version: 20150622052210) do
   end
 
   create_table "master_genres", force: :cascade do |t|
-    t.string   "name",       limit: 255, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string "name",          limit: 255, null: false
+    t.string "foursquare_id", limit: 255
   end
 
   create_table "master_meal_times", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string "name", limit: 255
   end
 
   create_table "posts", force: :cascade do |t|
@@ -89,6 +86,7 @@ ActiveRecord::Schema.define(version: 20150622052210) do
     t.text     "remarks",           limit: 65535
     t.datetime "created_at",                                              null: false
     t.datetime "updated_at",                                              null: false
+    t.string   "foursquare_id",     limit: 255
   end
 
   create_table "user_valuations", force: :cascade do |t|
