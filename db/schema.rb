@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622134543) do
+ActiveRecord::Schema.define(version: 20150623022801) do
 
   create_table "average_prices", force: :cascade do |t|
     t.integer  "price",               limit: 4
@@ -22,9 +22,10 @@ ActiveRecord::Schema.define(version: 20150622134543) do
   end
 
   create_table "business_days", force: :cascade do |t|
-    t.integer  "day",        limit: 4, null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "day",           limit: 4, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "restaurant_id", limit: 4
   end
 
   create_table "business_hours", force: :cascade do |t|
@@ -80,13 +81,17 @@ ActiveRecord::Schema.define(version: 20150622134543) do
     t.decimal  "lat",                             precision: 9, scale: 6, null: false
     t.decimal  "lon",                             precision: 9, scale: 6, null: false
     t.integer  "master_genre_id",   limit: 4,                             null: false
-    t.date     "registration_date",                                       null: false
+    t.date     "registration_date"
     t.string   "address",           limit: 255
     t.string   "tel",               limit: 255
     t.text     "remarks",           limit: 65535
     t.datetime "created_at",                                              null: false
     t.datetime "updated_at",                                              null: false
     t.string   "foursquare_id",     limit: 255
+    t.string   "country",           limit: 255
+    t.string   "city",              limit: 255
+    t.string   "state",             limit: 255
+    t.string   "cc",                limit: 255
   end
 
   create_table "user_valuations", force: :cascade do |t|
