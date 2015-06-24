@@ -4,7 +4,7 @@ class Api::V1::RestaurantsController < ApplicationController
     lat = params[:lat]
     lon = params[:lon]
 
-    restaurants = Restaurant.search(lat, lon, limit, start)
+    restaurants = Restaurant.search(lat, lon)
 
     render :json => restaurants
   end
