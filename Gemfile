@@ -31,6 +31,10 @@ gem 'faraday'
 # load environment variables
 gem 'dotenv-rails', :groups => [:development, :test]
 
+# Image Uploader
+gem 'carrierwave'
+gem 'fog'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
