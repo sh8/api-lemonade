@@ -7,7 +7,7 @@ class Restaurant < ActiveRecord::Base
   end
 
   def self.near(lat, lon, start=0, limit=20)
-    self.select("*", "abs(lat - #{lat}) + abs(lon - #{lon}) as dist").order("dist asc").all.offset(start).first(limit)
+    self.select("*", "abs(lat - #{lat}) + abs(lon - #{lon}) as dist").order("dist asc").all.offset(start.to_i).first(limit.to_i)
   end
 
 end
