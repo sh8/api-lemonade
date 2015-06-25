@@ -20,6 +20,12 @@ end
 TOKYO = "13"
 master_genres = MasterGenre.all
 CSV.foreach("#{Rails.root}/script/api/station_data.csv", "r") do |row|
+  num = $.
+  puts num
+  log.info(num)
+  if num < 5487
+    next
+  end
   if row[6] == TOKYO
     puts row[2]
     log.info("station name is #{row[2]}")
@@ -31,15 +37,26 @@ CSV.foreach("#{Rails.root}/script/api/station_data.csv", "r") do |row|
         req.params['v'] = "20150622"
         req.params['ll'] = "#{row[10]},#{row[9]}"
         req.params['categoryId'] = m_g.foursquare_id
+        req.params['limit'] = "50"
+        req.params['radius'] = '30000'
         req.headers['Accept-Language'] = 'ja'
       end
-      restaurants = JSON.parse(res.body)
+
+      begin
+        restaurants = JSON.parse(res.body)
+      rescue => e
+        log.warn(e.message)
+        next
+      end
+
       if restaurants['response']['venues'].nil?
         next
       end
       puts "ok" if restaurants['response']['venues'].present?
       restaurants["response"]["venues"].each do |r|
-        unless Restaurant.where('foursquare_id = ?', r['id']).last.present?
+        if Restaurant.where('foursquare_id = ?', r['id']).last.present?
+          puts "skip"
+        else
           restaurant = Restaurant.new
           restaurant.foursquare_id = r['id']
           restaurant.name = r['name'].force_encoding('utf-8')
@@ -58,6 +75,8 @@ CSV.foreach("#{Rails.root}/script/api/station_data.csv", "r") do |row|
 
           begin
             restaurant.save!
+            puts restaurant.attributes
+            log.info(restaurant.attributes)
           rescue => e
             puts e.message
             log.warn(e.message)
