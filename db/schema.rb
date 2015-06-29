@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623102146) do
+ActiveRecord::Schema.define(version: 20150629042803) do
 
   create_table "average_prices", force: :cascade do |t|
     t.integer  "price",               limit: 4
@@ -69,10 +69,11 @@ ActiveRecord::Schema.define(version: 20150623102146) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4,   null: false
-    t.string   "photo_url",  limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "user_id",       limit: 4,   null: false
+    t.string   "photo",         limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "restaurant_id", limit: 4
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -93,6 +94,11 @@ ActiveRecord::Schema.define(version: 20150623102146) do
     t.string   "state",             limit: 255
     t.string   "cc",                limit: 255
   end
+
+  add_index "restaurants", ["foursquare_id"], name: "index_restaurants_on_foursquare_id", using: :btree
+  add_index "restaurants", ["lat"], name: "index_restaurants_on_lat", using: :btree
+  add_index "restaurants", ["lon"], name: "index_restaurants_on_lon", using: :btree
+  add_index "restaurants", ["name"], name: "index_restaurants_on_name", using: :btree
 
   create_table "user_valuations", force: :cascade do |t|
     t.integer  "user_id",          limit: 4,              null: false
@@ -120,6 +126,7 @@ ActiveRecord::Schema.define(version: 20150623102146) do
     t.integer  "status",          limit: 4,   default: 0
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
+    t.string   "access_token",    limit: 255
   end
 
 end
