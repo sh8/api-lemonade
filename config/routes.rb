@@ -7,8 +7,8 @@ Rails.application.routes.draw do
       get 'restaurants/near' => 'restaurants#near'
 
       # posts/
+      get 'posts' => 'posts#index'
       post 'posts/create' => 'posts#create'
-
     end
   end
 end
