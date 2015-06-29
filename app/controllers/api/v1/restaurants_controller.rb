@@ -14,10 +14,10 @@ class Api::V1::RestaurantsController < ApplicationController
     lon = params[:lon]
     limit = params[:limit]
     start = params[:start]
+    query = params[:query]
 
-    restaurants = Restaurant.near(lat, lon, start, limit)
+    restaurants = Restaurant.near(lat, lon, start, limit, query)
 
     render :json => restaurants
   end
-
 end
