@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629042803) do
+ActiveRecord::Schema.define(version: 20150702125450) do
 
   create_table "average_prices", force: :cascade do |t|
     t.integer  "price",               limit: 4
@@ -68,6 +68,12 @@ ActiveRecord::Schema.define(version: 20150629042803) do
     t.string "name", limit: 255
   end
 
+  create_table "master_sns_types", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id",       limit: 4,   null: false
     t.string   "photo",         limit: 255
@@ -100,6 +106,14 @@ ActiveRecord::Schema.define(version: 20150629042803) do
   add_index "restaurants", ["lon"], name: "index_restaurants_on_lon", using: :btree
   add_index "restaurants", ["name"], name: "index_restaurants_on_name", using: :btree
 
+  create_table "user_sns_types", force: :cascade do |t|
+    t.integer  "master_sns_type_id", limit: 4
+    t.integer  "user_id",            limit: 4
+    t.string   "access_token",       limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
   create_table "user_valuations", force: :cascade do |t|
     t.integer  "user_id",          limit: 4,              null: false
     t.integer  "restaurant_id",    limit: 4,              null: false
@@ -122,7 +136,7 @@ ActiveRecord::Schema.define(version: 20150629042803) do
     t.integer  "sex",             limit: 4,   default: 0, null: false
     t.date     "birthday"
     t.integer  "average_cost",    limit: 4
-    t.integer  "type",            limit: 4,   default: 0
+    t.integer  "role",            limit: 4,   default: 0
     t.integer  "status",          limit: 4,   default: 0
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
