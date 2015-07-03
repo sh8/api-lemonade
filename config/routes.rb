@@ -9,6 +9,9 @@ Rails.application.routes.draw do
       # posts/
       get 'posts' => 'posts#index'
       post 'posts/create' => 'posts#create'
+
+      #users/
+      post 'users/sign_up' => 'users#sign_up'
     end
   end
 end
