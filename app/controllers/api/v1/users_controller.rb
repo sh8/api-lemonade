@@ -30,7 +30,7 @@ class Api::V1::UsersController < ApplicationController
   private
   
   def user_attrs
-    params.require(:user).permit(:screen_name, :email, :password)
+    params.require(:user).permit(:screen_name, :email, :password, :uid, :sns_type)
   end
 
 end
