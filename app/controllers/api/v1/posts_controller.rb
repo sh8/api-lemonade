@@ -1,4 +1,5 @@
 class Api::V1::PostsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @posts = Post.where('user_id = ?', params[:user_id].to_i)

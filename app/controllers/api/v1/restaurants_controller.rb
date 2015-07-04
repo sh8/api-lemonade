@@ -1,4 +1,5 @@
 class Api::V1::RestaurantsController < ApplicationController
+  before_action :authenticate_user!
 
   def search
     lat = params[:lat]
