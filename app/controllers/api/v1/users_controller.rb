@@ -3,6 +3,12 @@ class Api::V1::UsersController < ApplicationController
   def sign_up
     @user = User.new(user_attrs)
     @user.access_token = SecureRandom.hex
+
+    if @user.password.nil?
+       @user.password = SecureRandom.hex
+       # パスワードを書いたメールを送る?
+    end
+
     if @user.save!
       render :json => @user.to_json(:only => "access_token")
     else
@@ -30,7 +36,7 @@ class Api::V1::UsersController < ApplicationController
   private
   
   def user_attrs
-    params.require(:user).permit(:screen_name, :email, :password, :uid, :sns_type)
+    params.require(:user).permit(:name, :screen_name, :email, :password, :uid, :sns_type, :uid)
   end
 
 end
