@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150703062022) do
+ActiveRecord::Schema.define(version: 20150709035103) do
 
   create_table "average_prices", force: :cascade do |t|
     t.integer  "price",               limit: 4
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 20150703062022) do
     t.string   "access_token",    limit: 255
     t.integer  "sns_type",        limit: 4
     t.string   "uid",             limit: 255
+    t.string   "profile_photo",   limit: 255
   end
 
 end
