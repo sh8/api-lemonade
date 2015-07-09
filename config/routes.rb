@@ -12,6 +12,10 @@ Rails.application.routes.draw do
 
       #users/
       post 'users/sign_up' => 'users#sign_up'
+
+      # time_lines/
+      get 'time_lines' => 'time_lines#index'
+  
     end
   end
 end
