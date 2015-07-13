@@ -21,4 +21,9 @@ class Api::V1::RestaurantsController < ApplicationController
 
     render :json => restaurants
   end
+
+  def show
+    restaurant = Restaurant.find(params[:id])
+    render :json => restaurant.posts.last(5).order('created_at asc').to_json(:include => {:user => {:only => [:id, :name, :profile_photo]}})
+  end
 end
