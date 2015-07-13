@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       # restaurants/
       get 'restaurants/search' => 'restaurants#search'
       get 'restaurants/near' => 'restaurants#near'
+      get 'restaurants/:id' => 'restaurants#show'
 
       # posts/
       get 'posts' => 'posts#index'
