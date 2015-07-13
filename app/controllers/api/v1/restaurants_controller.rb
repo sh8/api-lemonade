@@ -23,7 +23,15 @@ class Api::V1::RestaurantsController < ApplicationController
   end
 
   def show
-    restaurant = Restaurant.find(params[:id])
-    render :json => restaurant.posts.last(5).order('created_at asc').to_json(:include => {:user => {:only => [:id, :name, :profile_photo]}})
+    restaurant = Restaurant.includes(:posts).find(params[:id])
+    photos = restaurant.posts.where('photo is not null')
+    json = {
+      "posts" => restaurant.posts.includes(:user).order('created_at desc'),
+      "firstPhoto" => photos.first.photo.url,
+      "secondPhoto" => photos.first.photo.url,
+    }
+
+    render :json => json
   end
+
 end
