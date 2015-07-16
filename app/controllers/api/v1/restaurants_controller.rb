@@ -23,13 +23,16 @@ class Api::V1::RestaurantsController < ApplicationController
   end
 
   def show
-    restaurant = Restaurant.includes(:posts).find(params[:id])
-    photos = restaurant.posts.where('photo is not null')
+    restaurant = Restaurant.includes(:posts => :user).find(params[:id])
+    posts = restaurant.posts
+    photos = posts.where('photo is not null')
     json = {
-      "posts" => restaurant.posts.includes(:user).order('created_at desc'),
+      "posts" => posts.order('created_at desc').map {|p| {"photo" => {"url" => p.photo.url}, "user" => {'name' => p.user.screen_name, "profile_photo" => {"url" => p.user.profile_photo.url}}}},
       "firstPhoto" => photos.first.photo.url,
       "secondPhoto" => photos.first.photo.url,
     }
+
+    puts json.to_json
 
     render :json => json
   end
