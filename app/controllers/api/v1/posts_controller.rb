@@ -2,7 +2,11 @@ class Api::V1::PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @posts = Post.where('user_id = ?', current_user.id).order('id desc')
+    if params[:user_id].present?
+      @posts = Post.where('user_id = ?', params[:user_id]).order('id desc')
+    else
+      @posts = Post.where('user_id = ?', current_user.id).order('id desc')
+    end
     json = {
       "user" => current_user,
       "posts" => @posts.includes(:user),
