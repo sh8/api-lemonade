@@ -19,7 +19,17 @@ restaurants = Restaurant.all
 
 restaurants.each do |r|
 
+  if r.business_days.present?
+    next
+  end
+
   log.info("restarant_name is #{r.name}")
+  log.info("restaurant_id is #{r.id}")
+  puts("restaurant_id is #{r.id}")
+
+  if r.id < 24768
+    next
+  end
 
   venue_url = "venues/#{r.foursquare_id}"
 
@@ -31,7 +41,11 @@ restaurants.each do |r|
     req.headers['Accept-Language'] = 'ja'
   end
 
-  restaurant = JSON.parse(res.body)
+  begin
+    restaurant = JSON.parse(res.body)
+  rescue => e
+    log.error(e)
+  end
 
   restaurant_info = restaurant['response']['venue']
 
