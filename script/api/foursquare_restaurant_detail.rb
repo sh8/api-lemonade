@@ -27,7 +27,7 @@ restaurants.each do |r|
   log.info("restaurant_id is #{r.id}")
   puts("restaurant_id is #{r.id}")
 
-  if r.id < 24768
+  if r.id < 33744
     next
   end
 
