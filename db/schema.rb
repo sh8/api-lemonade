@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709035103) do
+ActiveRecord::Schema.define(version: 20150717150258) do
 
   create_table "average_prices", force: :cascade do |t|
     t.integer  "price",               limit: 4
@@ -44,19 +44,19 @@ ActiveRecord::Schema.define(version: 20150709035103) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "post_id",    limit: 4, null: false
+    t.integer  "user_id",    limit: 4, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "friend_ships", force: :cascade do |t|
     t.integer  "follow_user_id",   limit: 4,                 null: false
     t.integer  "followed_user_id", limit: 4,                 null: false
     t.boolean  "is_approved",      limit: 1, default: false, null: false
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
-  end
-
-  create_table "likes", force: :cascade do |t|
-    t.integer  "post_id",    limit: 4, null: false
-    t.integer  "user_id",    limit: 4, null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
   end
 
   create_table "master_genres", force: :cascade do |t|

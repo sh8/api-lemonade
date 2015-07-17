@@ -16,6 +16,11 @@ Rails.application.routes.draw do
 
       # time_lines/
       get 'time_lines' => 'time_lines#index'
+
+      # favorites/
+      get 'favorites' => 'favorites#index'
+      post 'favorites/create' => 'favorites#create'
+      delete 'favorites/:post_id' => 'favorites#destroy'
   
     end
   end
