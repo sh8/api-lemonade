@@ -32,8 +32,6 @@ class Api::V1::RestaurantsController < ApplicationController
       "secondPhoto" => photos.first.photo.url,
     }
 
-    puts json.to_json
-
     render :json => json
   end
 
