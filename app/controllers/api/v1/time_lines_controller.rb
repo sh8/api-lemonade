@@ -8,6 +8,7 @@ class Api::V1::TimeLinesController < ApplicationController
       json << {
         "restaurant_id" => p.restaurant_id,
         "id" => p.id,
+        "is_favorite" => p.is_favorite(current_user),
         "restaurant" => {
           "address" => p.restaurant.address,
           "id" => p.restaurant.id,
