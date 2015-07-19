@@ -1,5 +1,11 @@
 class Api::V1::UsersController < ApplicationController
 
+  def search
+    @users = User.search(params[:query])
+    render :json => @users
+  end
+
+  # Authentication
   def sign_up
     @user = User.new(user_attrs)
     @user.access_token = SecureRandom.hex
@@ -9,6 +15,7 @@ class Api::V1::UsersController < ApplicationController
        # パスワードを書いたメールを送る?
     end
 
+    puts @user.access_token
     if @user.save!
       render :json => @user.to_json(:only => "access_token")
     else
