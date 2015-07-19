@@ -19,7 +19,7 @@ class Api::V1::TimeLinesController < ApplicationController
         "user_id" => p.user_id,
         "photo" => {"url" => p.photo.url},
         "user" => {
-          "name" => p.user.name,
+          "name" => p.user.screen_name,
           "profile_photo" => {"url" => p.user.profile_photo.url}
         }
       }
